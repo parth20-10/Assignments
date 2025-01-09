@@ -1,0 +1,15 @@
+package application;
+
+public class Clerk extends Employee {
+	
+	public Clerk(String name,int age) {
+		setName(name);
+		setAge(age);
+		setDesignation("clerk");
+		setSalary(45000);
+	}
+	public void raiseSalary() {
+		setSalary(getSalary()+2000);
+	}
+
+}

@@ -1,0 +1,81 @@
+package application;
+import java.util.Scanner;  
+
+
+public class TestApp {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.out.println("----WELCOME TO WISSEN----");
+		MainMenue menue=new MainMenue();
+		menue.display();
+		
+		//Scanner object to take the inputs
+		Scanner myObj = new Scanner(System.in);
+		System.out.print("Eneter your Choice: ");
+		int choice=myObj.nextInt(0);
+		
+		
+		// employee array which is dynamic in nature
+		while(choice!=4) {
+			if(choice==1) {
+				menue.displayCreate();
+				System.out.print("Eneter your Employee Choice: ");
+				int subChoice=myObj.nextInt(0);
+				int count =0;
+				while(subChoice!=4) {
+					
+					if(subChoice==1) {
+						System.out.print("Eneter Programmer Name: ");
+						String name=myObj.nextLine();
+						System.out.print("Eneter Programmer Age: ");
+						int age=myObj.nextInt(0);
+						employeeArray.add(new Programmer(name,age));
+						count++;
+						menue.displayCreate();
+						System.out.print("Eneter your Employee Choice: ");
+						subChoice=myObj.nextInt(0);
+						
+					}
+					else if(subChoice==2) {
+						System.out.print("Eneter Clerk Name: ");
+						String name=myObj.nextLine();
+						System.out.print("Eneter Clerk Age: ");
+						int age=myObj.nextInt(0);
+						employeeArray.add(new Programmer(name,age));
+						count++;
+						menue.displayCreate();
+						System.out.print("Eneter your Employee Choice: ");
+						subChoice=myObj.nextInt(0);
+					}
+					else if(subChoice==3) {
+						System.out.print("Eneter Manager Name: ");
+						String name=myObj.nextLine();
+						System.out.print("Eneter Manager Age: ");
+						int age=myObj.nextInt(0);
+						employeeArray.add(new Programmer(name,age));
+						count++;
+						menue.displayCreate();
+						System.out.print("Eneter your Employee Choice: ");
+						subChoice=myObj.nextInt(0);
+					}
+					else if(subChoice==4) {System.out.println("New Employee Created: "+count);}
+					else {System.out.println("Enter valild Choice");}
+				}
+				
+				
+			}
+			else if (choice==2) {
+				menue.dipalayInformation();
+			}
+			else if (choice==3) {
+				menue.raiseSalaryMenue();
+			}
+			else if (choice==4) {System.out.println("See you next time");}
+			else {System.out.println("Enter valild Choice");}
+
+		}
+
+		
+	}
+}
