@@ -1,10 +1,9 @@
 package application;
 
-public class Clerk extends Employee {
+public final class Clerk extends Employee {
 	
-	public Clerk(String name,int age) {
-		setName(name);
-		setAge(age);
+	public Clerk() {
+		
 		setDesignation("clerk");
 		setSalary(20000);
 	}

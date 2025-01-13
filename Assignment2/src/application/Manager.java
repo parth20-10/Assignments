@@ -1,9 +1,8 @@
  package application;
 
-public class Manager extends Employee {
-	public Manager(String name,int age) {
-		setName(name);
-		setAge(age);
+public final class Manager extends Employee {
+	public Manager() {
+		
 		setDesignation("Manager");
 		setSalary(100000);
 	}

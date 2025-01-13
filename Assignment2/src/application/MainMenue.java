@@ -1,14 +1,13 @@
 package application;
 
-import java.util.ArrayList;
-
 public class MainMenue {
-
     public void display() {
         System.out.println("Press 1 : Create");
         System.out.println("Press 2 : Display");
         System.out.println("Press 3 : Raise Salary");
-        System.out.println("Press 4 : Exit");
+        System.out.println("Press 4 : Delete");
+        System.out.println("Press 5 : Exit");
+        System.out.print("Enter your Choice: ");
     }
 
     public void displayCreate() {
@@ -16,29 +15,6 @@ public class MainMenue {
         System.out.println("Press 2 : Clerk");
         System.out.println("Press 3 : Manager");
         System.out.println("Press 4 : Exit Create functionality");
-    }
-
-    public void displayInformation(ArrayList<Employee> employeeArray) {
-        if (employeeArray.isEmpty()) {
-            System.out.println("No employees to display.");
-        } else {
-            for (Employee emp : employeeArray) {
-                System.out.println("Name: " + emp.getName() +
-                                   ", Age: " + emp.getAge() +
-                                   ", Designation: " + emp.getDesignation() +
-                                   ", Salary: " + emp.getSalary());
-            }
-        }
-    }
-
-    public void raiseSalaryMenu(ArrayList<Employee> employeeArray) {
-        if (employeeArray.isEmpty()) {
-            System.out.println("No employees to raise salary.");
-        } else {
-            for (Employee emp : employeeArray) {
-                emp.raiseSalary();
-                System.out.println("Salary raised for " + emp.getName() + ". New Salary: " + emp.getSalary());
-            }
-        }
+        System.out.print("Enter your Choice: ");
     }
 }

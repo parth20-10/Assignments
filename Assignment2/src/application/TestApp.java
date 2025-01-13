@@ -1,86 +1,94 @@
 package application;
-import java.util.ArrayList;
+
 import java.util.Scanner;
 
 public class TestApp {
-
     public static void main(String[] args) {
-        System.out.println("----WELCOME TO WISSEN----");
         MainMenue menue = new MainMenue();
-        menue.display();
-
+        Employee[] employeeArray = new Employee[100];
+        int employeeCount = 0;
         Scanner myObj = new Scanner(System.in);
-        System.out.print("Enter your Choice: ");
-        int choice = myObj.nextInt();
-        myObj.nextLine(); 
-        ArrayList<Employee> employeeArray = new ArrayList<>();
 
-        while (choice != 4) {
-            if (choice == 1) {
-                menue.displayCreate();
-                System.out.print("Enter your Employee Choice: ");
-                int subChoice = myObj.nextInt();
-                myObj.nextLine(); 
-                int count = 0;
-
-                while (subChoice != 4) {
-                    if (subChoice == 1) {
-                        System.out.print("Enter Programmer Name: ");
-                        String name = myObj.nextLine();
-                        System.out.print("Enter Programmer Age: ");
-                        int age = myObj.nextInt();
-                        employeeArray.add(new Programmer(name, age));
-                        count++;
-                    }
-                    else if (subChoice == 2) {
-                        System.out.print("Enter Clerk Name: ");
-                        String name = myObj.nextLine();
-                        System.out.print("Enter Clerk Age: ");
-                        int age = myObj.nextInt();
-                        employeeArray.add(new Clerk(name, age));
-                        count++;
-                    }
-                    else if (subChoice == 3) {
-                        System.out.print("Enter Manager Name: ");
-                        String name = myObj.nextLine();
-                        System.out.print("Enter Manager Age: ");
-                        int age = myObj.nextInt();
-                        employeeArray.add(new Manager(name, age));
-                        count++;
-                    }
-                    
-                    
-                    else {
-                        System.out.println("Enter valid Choice");
-                    }
-
-                    menue.displayCreate();
-                    System.out.print("Enter your Employee Choice: ");
-                    subChoice = myObj.nextInt();
-                    myObj.nextLine(); 
-                }
-                System.out.println("New Employees Created: " + count);
-
-            }
-            else if (choice == 2) {
-                menue.displayInformation(employeeArray);
-            }
-            else if (choice == 3) {
-                menue.raiseSalaryMenu(employeeArray);
-            }
-            
-            else {
-                System.out.println("Enter valid Choice");
-            }
-
+        while (true) {
             menue.display();
-            System.out.print("Enter your Choice: ");
-            choice = myObj.nextInt();
-            myObj.nextLine(); 
-        }
-       
-        System.out.println("See you next time");
-        myObj.close();
+            int choice = myObj.nextInt();
+            myObj.nextLine();
 
+            if (choice == 1) {
+                while (true) {
+                    menue.displayCreate();
+                    int subChoice = myObj.nextInt();
+                    myObj.nextLine();
+
+                    if (subChoice == 1) {
+                        employeeArray[employeeCount++] = new Programmer();
+                    } else if (subChoice == 2) {
+                        employeeArray[employeeCount++] = new Clerk();
+                    } else if (subChoice == 3) {
+                        employeeArray[employeeCount++] = new Manager();
+                    } else if (subChoice == 4) {
+                        System.out.println("Total Employees: " + employeeCount);
+                        break;
+                    } else {
+                        System.out.println("Invalid choice. Try again.");
+                    }
+                }
+            } else if (choice == 2) {
+                if (employeeCount == 0) {
+                    System.out.println("No employees to display.");
+                } else {
+                    for (int i = 0; i < employeeCount; i++) {
+                        employeeArray[i].displayEmp();
+                    }
+                }
+            } else if (choice == 3) {
+                if (employeeCount == 0) {
+                    System.out.println("No employees to raise salary.");
+                } else {
+                    for (int i = 0; i < employeeCount; i++) {
+                        employeeArray[i].raiseSalary();
+                    }
+                    System.out.println("Salary updated for all employees.");
+                }
+            } else if (choice == 4) {
+                if (employeeCount == 0) {
+                    System.out.println("No employees to delete.");
+                    continue;
+                }
+
+                System.out.print("Enter eID to delete: ");
+                int deleteID = myObj.nextInt();
+                myObj.nextLine();
+
+                boolean found = false;
+                for (int i = 0; i < employeeCount; i++) {
+                    if (employeeArray[i].getEID() == deleteID) {
+                        System.out.println("Deleting Employee: ");
+                        employeeArray[i].displayEmp();
+                        found = true;
+                        System.out.println("Want to delted Employee (Y/N): ");
+                        String option = myObj.nextLine();
+                        if (option == "Y" || option == "y") {
+                            System.arraycopy(employeeArray, i + 1, employeeArray, i, employeeCount - i - 1);
+                            employeeArray[--employeeCount] = null;
+                        } else {
+                            System.out.println("Invalid choice employee not deleted");
+                        }
+
+                        break;
+                    }
+                }
+                if (!found) {
+                    System.out.println("Employee not found.");
+                }
+            } else if (choice == 5) {
+                System.out.println("See you next time!");
+                break;
+            } else {
+                System.out.println("Invalid choice. Try again.");
+            }
+        }
+
+        myObj.close();
     }
 }

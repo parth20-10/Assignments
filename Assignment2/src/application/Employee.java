@@ -1,38 +1,45 @@
 package application;
 
+import java.util.Scanner;
+
 public abstract class Employee {
-	private String name;
-	private int age;
-	private int salary;
-	private String designation;
-	public Employee() {
-		
-	}
+    private static int nextEID = 1;  
+    private String name;
+    private int eID;
+    private int age;
+    private int salary;
+    private String designation;
+
+    public Employee() {
+        this.eID = nextEID++; 
+        Scanner myObj = new Scanner(System.in);
+        System.out.print("Enter Name: ");
+        this.name = myObj.nextLine();
+        System.out.print("Enter Age: ");
+        this.age = myObj.nextInt();
+        myObj.nextLine();
+    }
+
+    final public void displayEmp() {
+        System.out.println("eID: " + eID + ", Name: " + name + ", Age: " + age +
+                ", Designation: " + designation + ", Salary: " + salary);
+    }
+
     public abstract void raiseSalary();
 
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public int getAge() {
-		return age;
-	}
-	public void setAge(int age) {
-		this.age = age;
-	}
-	public int getSalary() {
-		return salary;
-	}
-	public void setSalary(int salary) {
-		this.salary = salary;
-	}
-	public String getDesignation() {
-		return designation;
-	}
-	public void setDesignation(String designation) {
-		this.designation = designation;
-	}
+    public int getEID() {
+        return eID;
+    }
 
+    public int getSalary() {
+        return salary;
+    }
+
+    public void setSalary(int salary) {
+        this.salary = salary;
+    }
+
+    public void setDesignation(String designation) {
+        this.designation = designation;
+    }
 }
