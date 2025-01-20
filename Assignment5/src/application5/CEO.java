@@ -1,6 +1,6 @@
 package application5;
 public class CEO extends Employee {
-    private static final CEO ceo = new CEO();
+    public static final CEO ceo = new CEO();
     private CEO() {
         if(ceo == null){
             

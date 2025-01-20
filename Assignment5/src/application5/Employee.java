@@ -13,12 +13,7 @@ public abstract class Employee {
         this.age = GetDetails.setAge(0, 21, 60);
         this.name = GetDetails.setName("");
     }
-    public Employee(String Mess){
-        this.eID = nextEID++;
-        System.out.println(Mess);
-        this.age = GetDetails.setAge(0, 21, 60);
-        this.name = GetDetails.setName("");
-    }
+    
     
 
     public void displayEmp() {

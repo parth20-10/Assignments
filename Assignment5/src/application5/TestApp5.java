@@ -19,11 +19,12 @@ public class TestApp5 {
                     menue.displayCreate();
                     int subChoice = menue.readChoice(4);
                     if (subChoice == 1) {
-                        employeeArray[employeeCount++] = new Programmer();
+                        employeeArray[employeeCount++] =  Programmer.createProgrammer();
                     } else if (subChoice == 2) {
-                        employeeArray[employeeCount++] = new Clerk();
+                        employeeArray[employeeCount++] =  Clerk.creatClerk();
                     } else if (subChoice == 3) {
-                        employeeArray[employeeCount++] = new Manager();
+                        Manager manager =   Manager.createManager();
+                        employeeArray[employeeCount++] = manager;
                     } else if (subChoice == 4) {
                         System.out.println("Total Employees: " + employeeCount);
                         break;
