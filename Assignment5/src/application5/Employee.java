@@ -1,20 +1,26 @@
 package application5;
 
+import java.util.HashMap;
+
 public abstract class Employee {
-    private static int nextEID = 1;
-    private String name;
+    public static HashMap<Integer, Employee> employeeMap = new HashMap<>();
     private int eID;
+    private String name;
     private int age;
     private int salary;
     private String designation;
 
     public Employee() {
-        this.eID = nextEID++;
-        this.age = GetDetails.setAge(0, 21, 60);
-        this.name = GetDetails.setName("");
+        if(CEO.ceo == null){
+            System.out.println("CEO Details not found. Please create CEO first.");
+            CEO.createCEO();
+        }
+        this.eID = GetDetails.setId();
+        this.name = GetDetails.setName();
+        this.age = GetDetails.setAge(18, 60);
+        employeeMap.put(eID, this);
+        
     }
-    
-    
 
     public void displayEmp() {
         System.out.println("eID: " + eID + ", Name: " + name + ", Age: " + age +
@@ -27,20 +33,14 @@ public abstract class Employee {
         return eID;
     }
 
-   
     public void setSalary(int salary) {
         this.salary = salary;
     }
+
     public int getSalary() {
         return salary;
-    }   
+    }
     public void setDesignation(String designation) {
         this.designation = designation;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void  setAge(int age) {
-        this.age=age; 
     }
 }

@@ -9,7 +9,8 @@ public class MainMenue {
         System.out.println("Press 2 : Display");
         System.out.println("Press 3 : Raise Salary");
         System.out.println("Press 4 : Delete");
-        System.out.println("Press 5 : Exit");
+        System.out.println("Press 5 : Search");
+        System.out.println("Press 6 : Exit");
     }
 
     public void displayCreate() {

@@ -1,97 +1,89 @@
 package application5;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Scanner;
+import java.util.Set;
 
 public class TestApp5 {
     public static void main(String[] args) {
-        MainMenue menue = new MainMenue();
-        Employee[] employeeArray = new Employee[100];
-        int employeeCount = 0;
-        System.out.println("Welcome Enter the CEO Details: ");
-        employeeArray[employeeCount++] = CEO.createCEO();
+        MainMenue menu = new MainMenue();
+        System.out.println("Welcome! ");
+
         while (true) {
-
-            menue.display();
-            int choice = menue.readChoice(5);
+            menu.display();
+            int choice = menu.readChoice(5);
             if (choice == 1) {
+
                 while (true) {
-
-                    menue.displayCreate();
-                    int subChoice = menue.readChoice(4);
-                    if (subChoice == 1) {
-                        employeeArray[employeeCount++] =  Programmer.createProgrammer();
-                    } else if (subChoice == 2) {
-                        employeeArray[employeeCount++] =  Clerk.creatClerk();
-                    } else if (subChoice == 3) {
-                        Manager manager =   Manager.createManager();
-                        employeeArray[employeeCount++] = manager;
-                    } else if (subChoice == 4) {
-                        System.out.println("Total Employees: " + employeeCount);
-                        break;
+                    {
+                        menu.displayCreate();
+                        int subChoice = menu.readChoice(4);
+                        switch (subChoice) {
+                            case 1 -> Programmer.createProgrammer();
+                            case 2 -> Clerk.creatClerk();
+                            case 3 -> Manager.createManager();
+                            case 4 -> {
+                                System.out.println("Returning to main menu.");
+                                break;
+                            }
+                        }
+                        if (subChoice == 4) {
+                            break;
+                        }
                     }
-
                 }
             } else if (choice == 2) {
-                if (employeeCount == 0) {
+                if (Employee.employeeMap.isEmpty()) {
                     System.out.println("No employees to display.");
                 } else {
-                    for (int i = 0; i < employeeCount; i++) {
-                        employeeArray[i].displayEmp();
+                    for (Object value : Employee.employeeMap.values()) {
+                        ((Employee) value).displayEmp();
                     }
                 }
             } else if (choice == 3) {
-                if (employeeCount == 0) {
+                if (Employee.employeeMap.isEmpty()) {
                     System.out.println("No employees to raise salary.");
                 } else {
-                    for (int i = 0; i < employeeCount; i++) {
-                        employeeArray[i].raiseSalary();
+                    for (Object value : Employee.employeeMap.values()) {
+                        ((Employee) value).raiseSalary();
                     }
                     System.out.println("Salary updated for all employees.");
                 }
             } else if (choice == 4) {
-                if (employeeCount == 0) {
-                    System.out.println("No employees to delete.");
-                    continue;
-                }
-
                 System.out.print("Enter eID to delete: ");
                 Scanner myObj = new Scanner(System.in);
-
                 int deleteID = myObj.nextInt();
-                myObj.nextLine();
-
-                boolean found = false;
-                if(deleteID == 1){
+                if (deleteID == 1) {
                     System.out.println("CEO cannot be deleted.");
-                    continue;
-                }
-                for (int i = 0; i < employeeCount; i++) {
-                    if (employeeArray[i].getEID() == deleteID) {
-                        System.out.println("Deleting Employee: ");
-                        employeeArray[i].displayEmp();
-                        found = true;
-                        System.out.println("Want to delted Employee (Y/N): ");
-                        String option = myObj.nextLine();
-                        if (option.strip().equalsIgnoreCase("Y")) {
-                            System.arraycopy(employeeArray, i + 1, employeeArray, i, employeeCount - i - 1);
-                            employeeArray[--employeeCount] = null;
-                        } else {
-                            System.out.println("Employee not deleted");
-                        }
-
-                        break;
+                } else if (Employee.employeeMap.containsKey(deleteID)) {
+                    Employee emp = Employee.employeeMap.get(deleteID);
+                    emp.displayEmp();
+                    System.out.println("Confirm deletion? (Y/N): ");
+                    String confirm = myObj.next();
+                    if (confirm.equalsIgnoreCase("Y")) {
+                        Employee.employeeMap.remove(deleteID);
+                        System.out.println("Employee deleted.");
+                    } else {
+                        System.out.println("Employee not deleted.");
                     }
-                }
-                if (!found) {
+                } else {
                     System.out.println("Employee not found.");
                 }
-
             } else if (choice == 5) {
+                System.out.print("Enter eID to search: ");
+                Scanner myObj = new Scanner(System.in);
+                int searchID = myObj.nextInt();
+                if (Employee.employeeMap.containsKey(searchID)) {
+                    Employee emp = Employee.employeeMap.get(searchID);
+                    emp.displayEmp();
+                } else {
+                    System.out.println("Employee not found.");
+                }
+            } else if (choice == 6) {
                 System.out.println("See you next time!");
                 break;
             }
-
         }
     }
-
 }
