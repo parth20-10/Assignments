@@ -5,7 +5,7 @@ public class app {
     public static void main(String[] args) {
         try {
             Class<?> c = Class.forName("Calculator");
-            Object obj = c.getDeclaredConstructor().newInstance();
+            Object obj = c.newInstance();
 
             Method[] methods = c.getDeclaredMethods();
             System.out.println("Available operations:");
@@ -17,13 +17,12 @@ public class app {
             System.out.print("Enter the operation: ");
             String operation = scanner.next();
 
-            Method methodToInvoke = c.getMethod(operation, int.class, int.class);
 
             System.out.print("Enter the first number: ");
             int param1 = scanner.nextInt();
             System.out.print("Enter the second number: ");
             int param2 = scanner.nextInt();
-
+            Method methodToInvoke = c.getDeclaredMethod(operation, int.class, int.class);
             Object result = methodToInvoke.invoke(obj, param1, param2);
 
             System.out.println("Result: " + result);
