@@ -19,7 +19,7 @@ public abstract class Employee {
         name = GetDetails.setName("");
         age = GetDetails.setAge(0, 21, 60);
         employeeMap.put(eID, this);
-        GetDetails.storeEmployee(null);
+        
     }
 
     public void displayEmp() {
