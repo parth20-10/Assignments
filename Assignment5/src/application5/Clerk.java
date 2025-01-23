@@ -2,12 +2,11 @@ package application5;
 
 public class Clerk extends Employee {
     public Clerk() {
-        this.setDesignation("Clerk");
-        this.setSalary(20000);
+        setDesignation("Clerk");
+        setSalary(20000);
     }
 
-    public static Clerk creatClerk() {
-
+    public static Clerk createClerk() {
         return new Clerk();
     }
 

@@ -1,9 +1,9 @@
 package application5;
 
-public  class Programmer extends Employee {
+public class Programmer extends Employee {
     public Programmer() {
-        this.setDesignation("Programmer");
-        this.setSalary(80000);
+        setDesignation("Programmer");
+        setSalary(80000);
     }
     public static Programmer createProgrammer() {
         return new Programmer();

@@ -11,15 +11,15 @@ public abstract class Employee {
     private String designation;
 
     public Employee() {
-        if(CEO.ceo == null){
-            System.out.println("CEO Details not found. Please create CEO first.");
+        if (CEO.ceo == null) {
+            System.out.println("CEO not created. Creating CEO Enter His details.");
             CEO.createCEO();
         }
-        this.eID = GetDetails.setId();
-        this.name = GetDetails.setName();
-        this.age = GetDetails.setAge(18, 60);
+        eID = GetDetails.setId();
+        name = GetDetails.setName("");
+        age = GetDetails.setAge(0, 21, 60);
         employeeMap.put(eID, this);
-        
+        GetDetails.storeEmployee(null);
     }
 
     public void displayEmp() {
@@ -29,10 +29,6 @@ public abstract class Employee {
 
     public abstract void raiseSalary();
 
-    public int getEID() {
-        return eID;
-    }
-
     public void setSalary(int salary) {
         this.salary = salary;
     }
@@ -40,7 +36,24 @@ public abstract class Employee {
     public int getSalary() {
         return salary;
     }
+
     public void setDesignation(String designation) {
         this.designation = designation;
+    }
+
+    public String getDesignation() {
+        return designation;
+    }
+
+    public int geteID() {
+        return eID;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
