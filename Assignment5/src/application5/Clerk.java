@@ -1,7 +1,7 @@
 package application5;
 
 public class Clerk extends Employee {
-    public Clerk() {
+    private Clerk() {
         setDesignation("Clerk");
         setSalary(20000);
     }
@@ -9,7 +9,7 @@ public class Clerk extends Employee {
     public static Clerk createClerk() {
         return new Clerk();
     }
-
+    
     public void raiseSalary() {
         setSalary(getSalary() + 2000);
     }

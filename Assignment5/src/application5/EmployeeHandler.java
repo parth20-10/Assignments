@@ -18,8 +18,8 @@ public class EmployeeHandler {
                 """);
             choice = new MainMenu().readChoice(4);
             switch (choice) {
-                case 1 -> new Programmer();
-                case 2 -> new Clerk();
+                case 1 ->  Programmer.createProgrammer();
+                case 2 ->  Clerk.createClerk();
                 case 3 -> Manager.createManager();
                 case 4 -> System.out.println("Exiting create functionality.");
             }
@@ -49,7 +49,6 @@ public class EmployeeHandler {
             case 5 -> "designation";
             default -> throw new IllegalArgumentException("Invalid choice");
         };
-
         List<Employee> sortedEmployees = (List<Employee>) EmployeeUtils.sortEmployees(Employee.employeeMap, criteria);
             
         for (Employee employee : sortedEmployees) {

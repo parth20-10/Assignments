@@ -1,8 +1,9 @@
 package application5;
 
+import java.io.RandomAccessFile;
 import java.util.HashMap;
 
-public abstract class Employee {
+public abstract class Employee implements java.io.Serializable {
     public static HashMap<Integer, Employee> employeeMap = new HashMap<>();
     private int eID;
     private String name;
@@ -11,15 +12,23 @@ public abstract class Employee {
     private String designation;
 
     public Employee() {
-        if (CEO.ceo == null) {
-            System.out.println("CEO not created. Creating CEO Enter His details.");
-            CEO.createCEO();
+
+        try (RandomAccessFile raf = new RandomAccessFile("Assignment5\\employee.ser", "r")) {
+            long length = raf.length();
+            
+            if(CEO.ceo==null ) {
+                
+                System.out.println("CEO is not created Enter his details first...");
+                CEO.createCEO();
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
         eID = GetDetails.setId();
         name = GetDetails.setName("");
         age = GetDetails.setAge(0, 21, 60);
-        employeeMap.put(eID, this);
-        
+        Employee.employeeMap.put(eID, this);
+
     }
 
     public void displayEmp() {

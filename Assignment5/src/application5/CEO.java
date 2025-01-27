@@ -8,10 +8,12 @@ public class CEO extends Employee {
         setSalary(1000000);
         System.out.println("CEO created. Enter Employee details.");
     }
-
+    
     public static CEO createCEO() {
         return ceo;
     }
-
-    public void raiseSalary() {}
+   
+    public void raiseSalary() {
+        super.setSalary(getSalary()+25000);
+    }
 }

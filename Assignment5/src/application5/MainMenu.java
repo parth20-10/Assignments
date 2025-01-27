@@ -15,13 +15,7 @@ public class MainMenu {
         System.out.println("6: Exit");
     }
 
-    public void displayCreate() {
-        System.out.println("1: Programmer");
-        System.out.println("2: Clerk");
-        System.out.println("3: Manager");
-        System.out.println("4: Back");
-    }
-
+    
     public int readChoice(int maxChoice) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder buffer = new StringBuilder();
