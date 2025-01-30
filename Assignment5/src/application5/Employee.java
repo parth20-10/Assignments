@@ -1,46 +1,45 @@
 package application5;
 
-import java.io.RandomAccessFile;
 import java.util.HashMap;
 
 public abstract class Employee implements java.io.Serializable {
-    public static HashMap<Integer, Employee> employeeMap = new HashMap<>();
+    // public static HashMap<Integer, Employee> employeeMap = new HashMap<>();
     private int eID;
     private String name;
     private int age;
     private int salary;
     private String designation;
+    private String department;
 
     public Employee() {
 
-        try (RandomAccessFile raf = new RandomAccessFile("Assignment5\\employee.ser", "r")) {
-            long length = raf.length();
+        try  {
             
-            if(CEO.ceo==null ) {
+            if(CEO.ceo==false ) {
                 
-                System.out.println("CEO is not created Enter his details first...");
                 CEO.createCEO();
             }
         } catch (Exception e) {
             System.out.println(e);
         }
-        eID = GetDetails.setId();
         name = GetDetails.setName("");
         age = GetDetails.setAge(0, 21, 60);
-        Employee.employeeMap.put(eID, this);
+        department =GetDetails.setDepartment();
+        salary =GetDetails.setSalary();
+        // Employee.employeeMap.put(eID, this);
 
     }
 
-    public void displayEmp() {
-        System.out.println("eID: " + eID + ", Name: " + name + ", Age: " + age +
-                ", Designation: " + designation + ", Salary: " + salary);
-    }
+    // public void displayEmp() {
+    //     System.out.println("eID: " + eID + ", Name: " + name + ", Age: " + age +
+    //             ", Designation: " + designation + ", Salary: " + salary);
+    // }
 
-    public abstract void raiseSalary();
+    public  void raiseSalary(){
+        DatabaseConnectivity.appraisal();
+    };
 
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
+    
 
     public int getSalary() {
         return salary;
@@ -64,5 +63,8 @@ public abstract class Employee implements java.io.Serializable {
 
     public int getAge() {
         return age;
+    }
+    public String getDepartment(){
+        return department;
     }
 }

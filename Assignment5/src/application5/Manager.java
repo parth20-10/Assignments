@@ -7,7 +7,6 @@ public class Manager extends Employee {
     private Manager() {
         // managerCount++;
         setDesignation("Manager");
-        setSalary(50000);
     }
     
     // public static Manager createManager() {
@@ -24,7 +23,5 @@ public class Manager extends Employee {
     }
     
 
-    public void raiseSalary() {
-        setSalary(getSalary() + 1500);
-    }
+    
 }

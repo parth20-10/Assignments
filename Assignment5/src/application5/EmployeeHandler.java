@@ -11,26 +11,26 @@ public class EmployeeHandler {
         int choice;
         do {
             System.out.println("""
-                Press 1 : Programmer
-                Press 2 : Clerk
-                Press 3 : Manager
-                Press 4 : Exit Create functionality
-                """);
+                    Press 1 : Programmer
+                    Press 2 : Clerk
+                    Press 3 : Manager
+                    Press 4 : Exit Create functionality
+                    """);
             choice = new MainMenu().readChoice(4);
             switch (choice) {
-                case 1 ->  Programmer.createProgrammer();
-                case 2 ->  Clerk.createClerk();
-                case 3 -> Manager.createManager();
+                case 1 -> DatabaseConnectivity.store(Programmer.createProgrammer());
+                case 2 -> DatabaseConnectivity.store(Clerk.createClerk());
+                case 3 -> DatabaseConnectivity.store(Manager.createManager());
                 case 4 -> System.out.println("Exiting create functionality.");
             }
         } while (choice != 4);
     }
 
     public static void displayAll() {
-        if (Employee.employeeMap.isEmpty()) {
-            System.out.println("No employees to display.");
-            return;
-        }
+        // if (Employee.employeeMap.isEmpty()) {
+        // System.out.println("No employees to display.");
+        // return;
+        // }
 
         System.out.println("""
                 Sort employees by:
@@ -41,42 +41,34 @@ public class EmployeeHandler {
                 5: Designation
                 """);
         int choice = new MainMenu().readChoice(5);
-        String criteria = switch (choice) {
-            case 1 -> "id";
-            case 2 -> "name";
-            case 3 -> "age";
-            case 4 -> "salary";
-            case 5 -> "designation";
+        switch (choice) {
+            case 1 -> DatabaseConnectivity.display("eid");
+            case 2 -> DatabaseConnectivity.display("name");
+            case 3 -> DatabaseConnectivity.display("age");
+            case 4 -> DatabaseConnectivity.display("salary");
+            case 5 -> DatabaseConnectivity.display("designation");
             default -> throw new IllegalArgumentException("Invalid choice");
-        };
-        List<Employee> sortedEmployees = (List<Employee>) EmployeeUtils.sortEmployees(Employee.employeeMap, criteria);
-            
-        for (Employee employee : sortedEmployees) {
-            employee.displayEmp();
         }
-    }
+        ;
+        // List<Employee> sortedEmployees = (List<Employee>)
+        // EmployeeUtils.sortEmployees(Employee.employeeMap, criteria);
 
-    public static void raiseAllSalaries() {
-        if (Employee.employeeMap.isEmpty()) {
-            System.out.println("No employees to raise salary.");
-        } else {
-            for (Employee employee : Employee.employeeMap.values()) {
-                employee.raiseSalary();
-            }
-            System.out.println("Salary updated for all employees.");
-        }
+        // for (Employee employee : sortedEmployees) {
+        // employee.displayEmp();
+        // }
     }
 
     public static void deleteEmployee() {
         System.out.print("Enter eID to delete: ");
         int deleteID = Integer.parseInt(scanner.nextLine());
-        if (Employee.employeeMap.containsKey(deleteID)) {
-            if (deleteID == 1) {
-                System.out.println("CEO cannot be deleted.");
-            } else {
-                Employee.employeeMap.remove(deleteID);
-                System.out.println("Employee deleted.");
-            }
+        if (deleteID == 1) {
+            System.out.println("CEO can tbe deleted");
+            return;
+        }
+        if (DatabaseConnectivity.delete(deleteID)) {
+
+            System.out.println("Employee deleted.");
+
         } else {
             System.out.println("Employee not found.");
         }
@@ -90,28 +82,34 @@ public class EmployeeHandler {
                 3: Designation
                 """);
         int choice = new MainMenu().readChoice(3);
-        String criteria = switch (choice) {
-            case 1 -> "id";
-            case 2 -> "name";
-            case 3 -> "designation";
-            default -> throw new IllegalArgumentException("Invalid choice");
-        };
+        // String criteria=switch (choice) {
+        // case 1 -> ;
+        // case 2 -> ;
+        // case 3 -> ;
+        // default -> throw new IllegalArgumentException("Invalid choice");
+        // };
 
         System.out.print("Enter value to search: ");
-        Object value = switch (criteria) {
-            case "id" -> Integer.parseInt(scanner.nextLine());
-            case "name", "designation" -> scanner.nextLine();
+        Object value = switch (choice) {
+            case 1 -> Integer.parseInt(scanner.nextLine());
+            case 2, 3 -> scanner.nextLine();
             default -> throw new IllegalArgumentException("Invalid input");
         };
-
-
-        List< Employee> results = EmployeeUtils.searchEmployees(Employee.employeeMap, criteria, value);
-        if (results.isEmpty()) {
-            System.out.println("No employees found matching the criteria.");
-        } else {
-            for (Employee employee : results) {
-                employee.displayEmp();
-            }
+        switch (choice) {
+            case 1 -> DatabaseConnectivity.search("eid", (Integer) value);
+            case 2 -> DatabaseConnectivity.search("name", (String) value);
+            case 3 -> DatabaseConnectivity.search("designation", (String) value);
+            default -> throw new IllegalArgumentException("Invalid choice");
         }
+
+        // List< Employee> results = EmployeeUtils.searchEmployees(Employee.employeeMap,
+        // criteria, value);
+        // if (results.isEmpty()) {
+        // System.out.println("No employees found matching the criteria.");
+        // } else {
+        // for (Employee employee : results) {
+        // employee.displayEmp();
+        // }
+        // }
     }
 }

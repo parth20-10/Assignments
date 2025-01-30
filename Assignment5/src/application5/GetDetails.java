@@ -52,18 +52,34 @@ public class GetDetails {
         }
     }
 
-    public static int setId() {
+    // public static int setId() {
+    //     BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    //     while (true) {
+    //         try {
+    //             System.out.print("Enter ID: ");
+    //             int id = Integer.parseInt(reader.readLine());
+    //             if (id <= 0 || Employee.employeeMap.containsKey(id)) {
+    //                 throw new InvalidDataException("ID must be a positive number and unique.");
+    //             }
+    //             return id;
+    //         } catch (NumberFormatException e) {
+    //             System.out.println("Invalid input, must be a number.");
+    //         } catch (InvalidDataException e) {
+    //             e.display();
+    //         } catch (IOException e) {
+    //             System.out.println("An error occurred while reading input.");
+    //         }
+    //     }
+    // }
+
+    public static String setDepartment() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
         while (true) {
             try {
-                System.out.print("Enter ID: ");
-                int id = Integer.parseInt(reader.readLine());
-                if (id <= 0 || Employee.employeeMap.containsKey(id)) {
-                    throw new InvalidDataException("ID must be a positive number and unique.");
-                }
-                return id;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input, must be a number.");
+                System.out.print("Enter Department: ");
+                String  department = reader.readLine();
+                return department;
             } catch (InvalidDataException e) {
                 e.display();
             } catch (IOException e) {
@@ -71,5 +87,30 @@ public class GetDetails {
             }
         }
     }
+
+
+    public static int setSalary() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+        while (true) {
+            int salary=0;
+            try {
+                System.out.print("Enter Salary : ");
+                salary = Integer.parseInt(reader.readLine());
+                if (salary <0) {
+                    throw new InvalidDataException("Salary mus tbe Positive ");
+                }
+                return salary;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input, it must be a number.");
+            } catch (InvalidDataException e) {
+                e.display();
+            } catch (IOException e) {
+                System.out.println("An error occurred while reading input.");
+            }
+        }
+    }
+
+    
 }
     
