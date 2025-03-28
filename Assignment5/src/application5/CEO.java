@@ -30,9 +30,9 @@ public class CEO extends Employee {
 
     public static void createCEO() {
 
-         try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                "tiger");
-                Statement stmt = con.createStatement();) {
+         try (Connection con = DriverManager.getConnection(
+                    "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
+                Statement stmt = con.createStatement()) {
             ResultSet rs = stmt.executeQuery("select * from employee where eid = 1");
             if(rs.next()==true){
                 ceo=true;

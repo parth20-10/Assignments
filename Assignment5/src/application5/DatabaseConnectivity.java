@@ -9,8 +9,13 @@ public class DatabaseConnectivity {
 
     public static void store(Employee emp) {
         try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                    "tiger");
+            // Connection con =
+            // DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb",
+            // "postgres",
+            // "tiger");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
+
             PreparedStatement pstmt = con.prepareStatement(
                     "insert into employee(name,age,salary,designation,department) values (?,?,?,?,?)");
             pstmt.setString(1, emp.getName());
@@ -29,8 +34,8 @@ public class DatabaseConnectivity {
     }
 
     public static void display(String criteria) {
-        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                "tiger");
+        try (Connection con = DriverManager.getConnection(
+            "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
                 Statement stmt = con.createStatement();) {
             ResultSet rs = stmt.executeQuery("select * from employee order by  " + criteria);
             while (rs.next()) {
@@ -48,8 +53,8 @@ public class DatabaseConnectivity {
 
     public static boolean delete(int EID) {
         try {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                    "tiger");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
             Statement stmt = con.createStatement();
             stmt.executeUpdate("delete from employee where eid = " + EID);
             stmt.close();
@@ -69,8 +74,8 @@ public class DatabaseConnectivity {
 
             // Class.forName("org.postgresql.Driver");
 
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                    "tiger");
+            Connection con = DriverManager.getConnection(
+                    "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
             Statement stmt = con.createStatement();
             ResultSet rs = stmt.executeQuery("select * from employee where eid = " + id);
             while (rs.next()) {
@@ -95,8 +100,8 @@ public class DatabaseConnectivity {
     }
 
     public static void search(String criteria, String value) {
-        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                "tiger");
+        try (Connection con = DriverManager.getConnection(
+            "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
                 Statement stmt = con.createStatement();) {
             ResultSet rs = stmt.executeQuery("select * from employee where " + criteria + " = " + value);
             while (rs.next()) {
@@ -115,8 +120,8 @@ public class DatabaseConnectivity {
 
     public static void search(String criteria, int value) {
 
-        try (Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/empdb", "postgres",
-                "tiger");
+        try (Connection con = DriverManager.getConnection(
+                    "jdbc:postgresql://empdb:5432/empdb", "postgres", "tiger");
                 Statement stmt = con.createStatement();) {
             ResultSet rs = stmt.executeQuery("select * from employee where " + criteria + " = " + value);
             while (rs.next()) {
